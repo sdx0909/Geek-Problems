@@ -29,13 +29,13 @@ public class Solution {
         // int[] arr = {1, 2, 3, 4, 5};
         int[] arr = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
         int d = 4; // 10 12 14 16 18 20 2 4 6 8
-        rotateArr(arr, d);
+        rotateArr3(arr, d);
         // Displaying elements
         for(int i:arr){
             System.out.print(i+" ");
         }
     }
-    static void rotateArr(int arr[], int d) {
+    static void rotateArr1(int arr[], int d) {
         int n = arr.length;
         d = d % n; // Handle cases where d > n
 
@@ -56,5 +56,42 @@ public class Solution {
             start++;
             end--;
         }
+    }
+    
+    static void rotateArr2(int[] arr, int d) {
+        int n = arr.length;
+  
+        // Repeat the rotation d times
+        for (int i = 0; i < d; i++) {
+          
+            // Left rotate the array by one position
+            int first = arr[0];
+            for (int j = 0; j < n - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr[n - 1] = first;
+        }
+    }
+    static void rotateArr3(int[] arr, int d) {
+        int n = arr.length;
+
+        // Handle case when d > n
+        d %= n; // d = d % n
+        
+        // Storing rotated version of array
+        int[] temp = new int[n];
+
+        // Copy last n - d elements to the front of temp
+        for (int i = 0; i < n - d; i++)
+            temp[i] = arr[d + i];
+
+        // Copy the first d elements to the back of temp
+        for (int i = 0; i < d; i++)
+            temp[n - d + i] = arr[i];
+
+        // Copying the elements of temp in arr
+        // to get the final rotated array
+        for (int i = 0; i < n; i++)
+            arr[i] = temp[i];
     }
 }
